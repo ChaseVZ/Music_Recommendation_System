@@ -46,3 +46,5 @@ https://www.kaggle.com/code/vatsalmavani/music-recommendation-system-using-spoti
 https://www.tensorflow.org/recommenders
 
 https://analyticsindiamag.com/a-complete-guide-to-tensorflow-recommenders-with-python-code/
+
+Alternative: https://towardsdatascience.com/how-to-build-a-simple-song-recommender-296fcbc8c85
