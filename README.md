@@ -15,9 +15,34 @@ TensorFlow
 - (Package) pip install --upgrade tensorflow
 - (Package) pip install tensorflow-recommenders
 - (Package) pip install tensorflow-datasets
+- (Package) pip install pandas
+- (Package) pip install numpy
+
+Datasets
+
+- data_by_artists(mode,genres,acousticness,danceability,duration_ms,energy,instrumentalness,liveness,loudness,speechiness,tempo,valence,popularity,key)
+- data_by_genre(mode,genres,acousticness,danceability,duration_ms,energy,instrumentalness,liveness,loudness,speechiness,tempo,valence,popularity,key)
+- data_by_year(mode,year,acousticness,danceability,duration_ms,energy,instrumentalness,liveness,loudness,speechiness,tempo,valence,popularity,key)
 
 Run Program
 
 - py main.py
 
+Notes
+
+- you may get 'Could not load dynamic library ...' at runtime. You can ignore these
+
 For more detailed information visit: https://www.tensorflow.org/install/pip#windows
+
+References:
+
+Example Code
+https://colab.research.google.com/github/tensorflow/recommenders/blob/main/docs/examples/basic_retrieval.ipynb
+
+https://www.tensorflow.org/recommenders/examples/quickstart
+
+https://www.kaggle.com/code/vatsalmavani/music-recommendation-system-using-spotify-dataset/notebook
+
+https://www.tensorflow.org/recommenders
+
+https://analyticsindiamag.com/a-complete-guide-to-tensorflow-recommenders-with-python-code/
