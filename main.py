@@ -1,42 +1,19 @@
-import tensorflow as tf
-import tensorflow_datasets as tfds
-import tensorflow_recommenders as tfrs
-import numpy as np
-import pandas as pd
-from SongModel import SongModel
+# pip install -r requirements.txt
+# python3 main.py
 
-# Read in datasets
-artists_df = pd.read_csv('Data/data_by_artist.csv')
-genres_df = pd.read_csv('Data/data_by_genres.csv')
-# print(artists_df)
+import pandas
 
-artists_model = tf.keras.Sequential()
-genres_model = tf.keras.Sequential()
-# year_model = tf.keras.Sequential()
-   
-# Define your objectives.
-task = tfrs.tasks.Retrieval(metrics=tfrs.metrics.FactorizedTopK(
-    artists_df.batch(128).map(artists_model)
-  )
-)
+data_file = 'http://millionsongdataset.com/sites/default/files/AdditionalFiles/unique_tracks.txt'
 
-# Create a retrieval model.
-model = SongModel(genres_model, artists_model, task)
-model.compile(optimizer=tf.keras.optimizers.Adagrad(0.5))
+song_df_1 = pandas.read_table(data_file, delimiter='<SEP>', header = None, on_bad_lines='skip')
+song_df_1.columns = ['track_id', 'song_id', 'artist_name', 'song_title']
+song_df_1 = song_df_1.drop('track_id', 1)
 
-# Train.
-# model.fit(ratings.batch(4096), epochs=3)
+# Link to full dataset: http://millionsongdataset.com/tasteprofile/#desc
+song_df_2 = pandas.read_table('sample_triplets_data_1')
+song_df_2.columns = ['user_id', 'song_id', 'listen_count']
 
-# Set up retrieval using trained representations.
-# index = tfrs.layers.ann.BruteForce(model.user_model)
-# index.index_from_dataset(
-   #  movies.batch(100).map(lambda title: (title, model.movie_model(title)))
-# )
-
-# Get recommendations.
-# _, titles = index(np.array(["42"]))
-# print(f"Recommendations for user 42: {titles[0, :3]}")
-
-
+song_df = pandas.merge(song_df_1, song_df_2, on='song_id')
+print(song_df.head())
 
 
