@@ -3,6 +3,7 @@
 # python3 main.py
 
 import pandas
+import Recommenders
 from sklearn.model_selection import train_test_split
 
 
@@ -41,7 +42,9 @@ songs = song_df['song_title']
 train_data, test_data  = train_test_split(song_df, test_size = 0.20, random_state = 0)
 
 pm = Recommenders.popularity_recommender_py()
-pm.create(train_data, 'user_id', 'song')
+pm.create(train_data, 'user_id', 'song_id')
+
 #user the popularity model to make some prediction
 user_id = users[5]
-pm.recommend(user_id)
+songObj = pm.recommend(user_id)
+print(songObj)
