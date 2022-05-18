@@ -3,3 +3,6 @@ venv/
 ./venv
 virtualenv/
 ./virtualenv
+
+# files
+/Data/train_triplets.txt
