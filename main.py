@@ -3,9 +3,17 @@
 # python3 main.py
 
 import pandas
+import json
 import Recommenders
 from sklearn.model_selection import train_test_split
 
+
+def get_songs_list():
+   return song_df['song_title'].to_list()
+# Function for Flask to call with an input song name
+def generate_similar_song(songTitle):
+   df = pm.get_similar_items([songTitle])
+   return df.to_json()
 
 # Step 1: Obtaining Data
 data_file = 'http://millionsongdataset.com/sites/default/files/AdditionalFiles/unique_tracks.txt'
@@ -23,10 +31,14 @@ song_df_2 = pandas.read_table('Data/25mb_train_triplets.txt')
 song_df_2.columns = ['user_id', 'song_id', 'listen_count']
 
 song_df = pandas.merge(song_df_1, song_df_2, on="song_id", how="right")
+song_df = song_df.dropna()
+
+myDict = dict(zip(song_df.song_title, song_df.artist_name))
 # song_df.drop_duplicates(['song_id'])
-# print(song_df.columns)
+print(song_df.columns)
 # print("\n #### MERGED DF #### \n")
 print(song_df.head())
+print(len(song_df.index))
 
 
 # Step 2: Data Transformation                 
@@ -51,10 +63,17 @@ pm.create(train_data, 'user_id', 'song_title')
 # user_id = users[5]
 # songObj = pm.recommend(user_id)
 # print(songObj)
-
 print(pm.get_similar_items(['You Only Live Once']))
 print(" # # # # # ## # # # # # # ")
-print(pm.get_similar_items(['Stonehenge']))
-print(" # # # # # ## # # # # # # ")
+
+# Attempting to get a song that  does  not exist in  our  dataset
 print(pm.get_similar_items(['Sasdsad']))
+
+
+myJson = generate_similar_song('You Only Live Once')
+myJson = json.loads(myJson)
+# Big data object, may use other things from this
+# print(myJson)
+for i in myJson['song'].values():
+   print(i  + ", " + myDict[i])
 
