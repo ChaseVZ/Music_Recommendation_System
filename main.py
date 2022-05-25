@@ -13,6 +13,8 @@ data_file = 'http://millionsongdataset.com/sites/default/files/AdditionalFiles/u
 song_df_1 = pandas.read_table(data_file, delimiter='<SEP>', header = None, on_bad_lines='skip', engine='python')
 song_df_1.columns = ['track_id', 'song_id', 'artist_name', 'song_title']
 song_df_1 = song_df_1.drop('track_id', 1)
+
+# Now just takingt the first 10,000 songs, following the article
 song_df_1 = song_df_1.head(10000)
 
 # Link to full dataset: http://millionsongdataset.com/tasteprofile/#desc
@@ -24,7 +26,7 @@ song_df = pandas.merge(song_df_1, song_df_2, on="song_id", how="right")
 # song_df.drop_duplicates(['song_id'])
 # print(song_df.columns)
 # print("\n #### MERGED DF #### \n")
-# print(song_df.head())
+print(song_df.head())
 
 
 # Step 2: Data Transformation                 
@@ -52,7 +54,7 @@ pm.create(train_data, 'user_id', 'song_title')
 
 print(pm.get_similar_items(['You Only Live Once']))
 print(" # # # # # ## # # # # # # ")
-print(pm.get_similar_items(['Home Again']))
+print(pm.get_similar_items(['Stonehenge']))
 print(" # # # # # ## # # # # # # ")
 print(pm.get_similar_items(['Sasdsad']))
 
