@@ -26,7 +26,7 @@ Datasets
 
 Run Program
 
-- export FLASK_APP=api
+- export FLASK_APP=app
 - py main.py
 
 Notes
